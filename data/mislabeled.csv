@@ -1,0 +1,104 @@
+ticker,name,gics_sector,semantic_sector,cross_rate
+BRK.B,Berkshire Hathaway,Financials,Industrials,1.0
+BR,Broadridge Financial Solutions,Industrials,Financials,1.0
+ECL,Ecolab,Materials,Health Care,1.0
+CTAS,Cintas,Industrials,Health Care,1.0
+APTV,Aptiv,Consumer Discretionary,Information Technology,1.0
+IFF,International Flavors & Fragrances,Materials,Consumer Staples,1.0
+GRMN,Garmin,Consumer Discretionary,Information Technology,1.0
+OMC,Omnicom Group,Communication Services,Financials,1.0
+POOL,Pool Corporation,Consumer Discretionary,Industrials,1.0
+FSLR,First Solar,Information Technology,Utilities,0.9
+FCX,Freeport-McMoRan,Materials,Consumer Staples,0.9
+EA,Electronic Arts,Communication Services,Consumer Discretionary,0.9
+EQIX,Equinix,Real Estate,Consumer Discretionary,0.9
+CBRE,CBRE Group,Real Estate,Financials,0.9
+CPRT,Copart,Industrials,Consumer Discretionary,0.9
+GOOG,Alphabet Inc. (Class C),Communication Services,Information Technology,0.9
+GOOGL,Alphabet Inc. (Class A),Communication Services,Information Technology,0.9
+TSCO,Tractor Supply,Consumer Discretionary,Consumer Staples,0.9
+WSM,"Williams-Sonoma, Inc.",Consumer Discretionary,Real Estate,0.9
+DD,DuPont,Materials,Industrials,0.9
+CRH,CRH plc,Materials,Industrials,0.9
+ROL,"Rollins, Inc.",Industrials,Consumer Discretionary,0.9
+STLD,Steel Dynamics,Materials,Industrials,0.9
+MOS,Mosaic Company (The),Materials,Consumer Staples,0.9
+GWW,W. W. Grainger,Industrials,Consumer Staples,0.9
+OTIS,Otis Worldwide,Industrials,Financials,0.9
+NVR,"NVR, Inc.",Consumer Discretionary,Real Estate,0.9
+PHM,PulteGroup,Consumer Discretionary,Real Estate,0.9
+SHW,Sherwin-Williams,Materials,Consumer Discretionary,0.9
+META,Meta Platforms,Communication Services,Information Technology,0.9
+NUE,Nucor,Materials,Industrials,0.9
+VRSK,Verisk Analytics,Industrials,Financials,0.9
+VRSN,Verisign,Information Technology,Real Estate,0.9
+J,Jacobs Solutions,Industrials,Consumer Discretionary,0.9
+INTU,Intuit,Information Technology,Financials,0.9
+ALB,Albemarle Corporation,Materials,Energy,0.9
+AAPL,Apple Inc.,Information Technology,Consumer Discretionary,0.9
+FTV,Fortive,Industrials,Health Care,0.8
+EBAY,eBay Inc.,Consumer Discretionary,Financials,0.8
+ULTA,Ulta Beauty,Consumer Discretionary,Consumer Staples,0.8
+TTD,Trade Desk (The),Communication Services,Consumer Discretionary,0.8
+TMUS,T-Mobile US,Communication Services,Information Technology,0.8
+TSLA,"Tesla, Inc.",Consumer Discretionary,Industrials,0.8
+PM,Philip Morris International,Consumer Staples,Consumer Discretionary,0.8
+DASH,DoorDash,Consumer Discretionary,Industrials,0.8
+SBUX,Starbucks,Consumer Discretionary,Consumer Staples,0.8
+SLB,Schlumberger,Energy,Industrials,0.8
+NEM,Newmont,Materials,Consumer Staples,0.8
+PPG,PPG Industries,Materials,Information Technology,0.8
+GEV,GE Vernova,Industrials,Utilities,0.8
+MAS,Masco,Industrials,Consumer Staples,0.8
+LIN,Linde plc,Materials,Utilities,0.8
+GEN,Gen Digital,Information Technology,Communication Services,0.8
+EFX,Equifax,Industrials,Financials,0.8
+EQT,EQT Corporation,Energy,Utilities,0.8
+AXON,Axon Enterprise,Industrials,Information Technology,0.8
+BLDR,Builders FirstSource,Industrials,Consumer Discretionary,0.8
+CTVA,Corteva,Materials,Health Care,0.8
+ADP,Automatic Data Processing,Industrials,Information Technology,0.8
+AMZN,Amazon,Consumer Discretionary,Information Technology,0.8
+GM,General Motors,Consumer Discretionary,Industrials,0.8
+HAL,Halliburton,Energy,Industrials,0.8
+AWK,American Water Works,Utilities,Industrials,0.7
+BALL,Ball Corporation,Materials,Consumer Staples,0.7
+BKNG,Booking Holdings,Consumer Discretionary,Financials,0.7
+BBY,Best Buy,Consumer Discretionary,Consumer Staples,0.7
+BG,Bunge Global,Consumer Staples,Energy,0.7
+APD,Air Products,Materials,Energy,0.7
+AMT,American Tower,Real Estate,Industrials,0.7
+CMG,Chipotle Mexican Grill,Consumer Discretionary,Consumer Staples,0.7
+CSGP,CoStar Group,Real Estate,Financials,0.7
+YUM,Yum! Brands,Consumer Discretionary,Consumer Staples,0.7
+STE,Steris,Health Care,Industrials,0.7
+TDY,Teledyne Technologies,Information Technology,Industrials,0.7
+GPC,Genuine Parts Company,Consumer Discretionary,Industrials,0.7
+CARR,Carrier Global,Industrials,Financials,0.7
+ORLY,O’Reilly Automotive,Consumer Discretionary,Industrials,0.7
+RL,Ralph Lauren Corporation,Consumer Discretionary,Consumer Staples,0.7
+VRT,Vertiv,Industrials,Information Technology,0.7
+JBL,Jabil,Information Technology,Industrials,0.7
+LEN,Lennar,Consumer Discretionary,Real Estate,0.7
+LYB,LyondellBasell,Materials,Energy,0.7
+PAYX,Paychex,Industrials,Health Care,0.7
+IT,Gartner,Information Technology,Financials,0.7
+MTD,Mettler Toledo,Health Care,Industrials,0.7
+JCI,Johnson Controls,Industrials,Financials,0.7
+APH,Amphenol,Information Technology,Industrials,0.6
+FAST,Fastenal,Industrials,Consumer Discretionary,0.6
+EXE,Expand Energy,Energy,Utilities,0.6
+AZO,AutoZone,Consumer Discretionary,Industrials,0.6
+LRCX,Lam Research,Information Technology,Industrials,0.6
+KVUE,Kenvue,Consumer Staples,Health Care,0.6
+HD,Home Depot (The),Consumer Discretionary,Industrials,0.6
+IRM,Iron Mountain,Real Estate,Financials,0.6
+IP,International Paper,Materials,Industrials,0.6
+MCD,McDonald's,Consumer Discretionary,Consumer Staples,0.6
+KLAC,KLA Corporation,Information Technology,Industrials,0.6
+LHX,L3Harris,Industrials,Information Technology,0.6
+ROK,Rockwell Automation,Industrials,Information Technology,0.6
+QCOM,Qualcomm,Information Technology,Communication Services,0.6
+SWKS,Skyworks Solutions,Information Technology,Industrials,0.6
+SW,Smurfit Westrock,Materials,Consumer Staples,0.6
+VMC,Vulcan Materials Company,Materials,Industrials,0.6

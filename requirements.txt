@@ -1,0 +1,10 @@
+pandas
+numpy
+lxml
+yfinance
+sentence-transformers
+qdrant-client
+umap-learn
+scikit-learn
+matplotlib
+seaborn

@@ -1,0 +1,25 @@
+# --- excluded from the public repo (kept locally) ---
+# Earlier report/slide exports (superseded by the revised write-up)
+*.pdf
+# Prior submission bundle and a redundant copy of the dataset
+submission/
+data/zip/
+# Internal working note
+REVISION_BRIEF.md
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+.venv/
+venv/
+env/
+
+# --- Vector DB / local services ---
+qdrant_storage/
+
+# --- OS / editor ---
+.DS_Store
+.idea/
+.vscode/
