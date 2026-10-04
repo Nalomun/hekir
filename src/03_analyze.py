@@ -28,7 +28,7 @@ import gics_lib as g
 K = 10            # neighbors used for metrics (discretionary)
 N_PERM = 10_000   # label permutations for the significance tests
 SEED = 42
-CANDIDATE_THRESHOLD = 0.6   # cross-sector rate; see mismatch_threshold_counts.csv
+CANDIDATE_THRESHOLD = 0.7   # cross-sector rate (chosen from 0.6/0.7/0.8/0.9; see mismatch_threshold_counts.csv)
 
 
 def main():

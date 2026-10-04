@@ -24,7 +24,7 @@ Specification (fixed before looking at results):
              firms by whether any embedding peer sits outside the GICS sector.
 
 Input : data/prices/close.csv.gz (from 05_fetch_prices.py), data/meta.csv,
-        data/neighbors.csv, data/mismatch_candidates.csv
+        data/neighbors.csv
 Output: data/comovement_by_firm.csv, data/comovement_summary.csv
 """
 import numpy as np
@@ -100,7 +100,10 @@ def test_mean(d: np.ndarray) -> dict:
 def main():
     meta = pd.read_csv("data/meta.csv")
     nb = pd.read_csv("data/neighbors.csv")
-    cand = pd.read_csv("data/mismatch_candidates.csv")
+    # candidates recomputed from the neighbor table so every threshold is
+    # available, not just the one written to mismatch_candidates.csv
+    mt = g.mismatch_table(nb)
+    foreign = mt["semantic_sector"] != mt["gics_sector"]
     ret, dropped, n_days = load_returns(meta)
     print(f"Window {START}..{END}: {n_days} trading days; {ret.shape[1]} firms with "
           f">= {MIN_RETURNS} returns; excluded {len(dropped)}: {dropped}")
@@ -115,7 +118,7 @@ def main():
                    "firms with >=1 cross-sector embedding peer": pf[pf["any_cross_peer"]],
                    "firms with all embedding peers in-sector": pf[~pf["any_cross_peer"]]}
         for t in g.THRESHOLDS:
-            tick = cand.loc[cand["cross_rate"] >= t - 1e-9, "ticker"]
+            tick = mt.loc[foreign & (mt["cross_rate"] >= t - 1e-9), "ticker"]
             subsets[f"mismatch candidates (cross-rate >= {t})"] = pf[pf["ticker"].isin(tick)]
         for name, sub in subsets.items():
             res = test_mean(sub["diff"].to_numpy())

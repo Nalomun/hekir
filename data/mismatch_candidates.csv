@@ -82,18 +82,3 @@ RL,Ralph Lauren Corporation,Consumer Discretionary,Consumer Staples,False,0.7
 ROL,"Rollins, Inc.",Industrials,Communication Services,True,0.7
 STE,Steris,Health Care,Industrials,False,0.7
 SW,Smurfit Westrock,Materials,Consumer Staples,False,0.7
-AXON,Axon Enterprise,Industrials,Information Technology,False,0.6
-AZO,AutoZone,Consumer Discretionary,Industrials,False,0.6
-BKR,Baker Hughes,Energy,Industrials,False,0.6
-CAT,Caterpillar Inc.,Industrials,Energy,True,0.6
-CSGP,CoStar Group,Real Estate,Financials,True,0.6
-DRI,Darden Restaurants,Consumer Discretionary,Consumer Staples,False,0.6
-EXE,Expand Energy,Energy,Utilities,False,0.6
-KLAC,KLA Corporation,Information Technology,Industrials,False,0.6
-LRCX,Lam Research,Information Technology,Industrials,True,0.6
-MCD,McDonald's,Consumer Discretionary,Consumer Staples,False,0.6
-MSI,Motorola Solutions,Information Technology,Industrials,True,0.6
-ORLY,O’Reilly Automotive,Consumer Discretionary,Industrials,False,0.6
-ROST,Ross Stores,Consumer Discretionary,Consumer Staples,False,0.6
-T,AT&T,Communication Services,Information Technology,False,0.6
-TEL,TE Connectivity,Information Technology,Industrials,True,0.6
