@@ -20,8 +20,24 @@ except ImportError:
 MODEL = "all-MiniLM-L6-v2"     # 384-dim, fast on CPU. Upgrade: BAAI/bge-small-en-v1.5
 
 
+def merge_share_classes(df: pd.DataFrame) -> pd.DataFrame:
+    """Keep one row per company.
+
+    Dual-class listings (GOOGL/GOOG, FOXA/FOX, NWSA/NWS) carry identical
+    business summaries, so each twin would be the other's cosine-1.0 nearest
+    neighbor and the same company would be counted twice. Keep the first
+    listed class (Wikipedia order: GOOGL, FOXA, NWSA).
+    """
+    dup = df.duplicated("summary", keep="first")
+    for t in df.loc[dup, "ticker"]:
+        kept = df.loc[(df["summary"] == df.loc[df.ticker == t, "summary"].iloc[0]) & ~dup, "ticker"].iloc[0]
+        print(f"  merged share class {t} into {kept}")
+    return df.loc[~dup].reset_index(drop=True)
+
+
 def main():
     df = pd.read_csv("data/companies.csv")
+    df = merge_share_classes(df)
     print(f"Loaded {len(df)} companies. Embedding with {MODEL}...")
     model = SentenceTransformer(MODEL)
     vecs = model.encode(
