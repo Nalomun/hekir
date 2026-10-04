@@ -1,12 +1,12 @@
 sector,cross_sector_rate
-Materials,0.7538461538461538
-Consumer Discretionary,0.64375
-Industrials,0.48375
-Communication Services,0.4826086956521739
-Energy,0.38571428571428573
-Information Technology,0.33194444444444443
-Real Estate,0.2967741935483871
-Consumer Staples,0.24444444444444444
-Financials,0.16533333333333333
-Health Care,0.15593220338983052
-Utilities,0.0935483870967742
+Materials,0.7423076923076923
+Consumer Discretionary,0.6604166666666667
+Communication Services,0.515
+Industrials,0.45
+Energy,0.40476190476190477
+Real Estate,0.3548387096774194
+Information Technology,0.29444444444444445
+Consumer Staples,0.25833333333333336
+Financials,0.15333333333333332
+Health Care,0.13389830508474576
+Utilities,0.1

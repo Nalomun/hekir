@@ -1,0 +1,16 @@
+{
+  "N": 499,
+  "in_sector_rate": 0.6597194388777555,
+  "chance_rate": 0.1095765828846448,
+  "in_sector_lift": 6.020624311421226,
+  "k": 10,
+  "n_perm": 10000,
+  "seed": 42,
+  "p_in_sector": 9.999000099990002e-05,
+  "offdiag_cells": 110,
+  "offdiag_sig_bh05": 91,
+  "offdiag_sig_bh05_above": 6,
+  "offdiag_sig_bh05_below": 85,
+  "asym_pairs": 55,
+  "asym_sig_bh05": 8
+}

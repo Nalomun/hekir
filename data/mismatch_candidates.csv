@@ -1,0 +1,99 @@
+ticker,name,gics_sector,semantic_sector,modal_tie,cross_rate
+APTV,Aptiv,Consumer Discretionary,Information Technology,False,1.0
+BR,Broadridge Financial Solutions,Industrials,Financials,False,1.0
+BRK.B,Berkshire Hathaway,Financials,Industrials,False,1.0
+FSLR,First Solar,Information Technology,Utilities,False,1.0
+GOOGL,Alphabet Inc. (Class A),Communication Services,Information Technology,False,1.0
+GRMN,Garmin,Consumer Discretionary,Information Technology,False,1.0
+IFF,International Flavors & Fragrances,Materials,Consumer Staples,False,1.0
+META,Meta Platforms,Communication Services,Information Technology,False,1.0
+OMC,Omnicom Group,Communication Services,Financials,False,1.0
+WSM,"Williams-Sonoma, Inc.",Consumer Discretionary,Consumer Staples,False,1.0
+BALL,Ball Corporation,Materials,Consumer Staples,False,0.9
+CPRT,Copart,Industrials,Consumer Discretionary,False,0.9
+CTAS,Cintas,Industrials,Financials,False,0.9
+ECL,Ecolab,Materials,Health Care,False,0.9
+EQIX,Equinix,Real Estate,Consumer Discretionary,False,0.9
+GWW,W. W. Grainger,Industrials,Consumer Staples,False,0.9
+INTU,Intuit,Information Technology,Financials,False,0.9
+IRM,Iron Mountain,Real Estate,Financials,False,0.9
+MOS,Mosaic Company (The),Materials,Consumer Staples,False,0.9
+NUE,Nucor,Materials,Industrials,False,0.9
+NVR,"NVR, Inc.",Consumer Discretionary,Real Estate,False,0.9
+PHM,PulteGroup,Consumer Discretionary,Real Estate,False,0.9
+POOL,Pool Corporation,Consumer Discretionary,Industrials,False,0.9
+STLD,Steel Dynamics,Materials,Industrials,False,0.9
+TSCO,Tractor Supply,Consumer Discretionary,Consumer Staples,False,0.9
+TTD,Trade Desk (The),Communication Services,Information Technology,False,0.9
+ULTA,Ulta Beauty,Consumer Discretionary,Consumer Staples,False,0.9
+AMZN,Amazon,Consumer Discretionary,Information Technology,False,0.8
+APD,Air Products,Materials,Industrials,False,0.8
+BLDR,Builders FirstSource,Industrials,Consumer Discretionary,True,0.8
+CBRE,CBRE Group,Real Estate,Financials,False,0.8
+CRH,CRH plc,Materials,Industrials,False,0.8
+CTVA,Corteva,Materials,Health Care,False,0.8
+DASH,DoorDash,Consumer Discretionary,Consumer Staples,True,0.8
+DD,DuPont,Materials,Health Care,False,0.8
+EFX,Equifax,Industrials,Financials,False,0.8
+EQT,EQT Corporation,Energy,Utilities,False,0.8
+FCX,Freeport-McMoRan,Materials,Consumer Staples,False,0.8
+FTV,Fortive,Industrials,Health Care,False,0.8
+GEN,Gen Digital,Information Technology,Health Care,False,0.8
+GPC,Genuine Parts Company,Consumer Discretionary,Industrials,False,0.8
+HAL,Halliburton,Energy,Industrials,False,0.8
+J,Jacobs Solutions,Industrials,Consumer Discretionary,True,0.8
+LIN,Linde plc,Materials,Utilities,False,0.8
+NEM,Newmont,Materials,Consumer Staples,False,0.8
+PAYX,Paychex,Industrials,Financials,True,0.8
+PM,Philip Morris International,Consumer Staples,Consumer Discretionary,True,0.8
+PPG,PPG Industries,Materials,Information Technology,False,0.8
+SBAC,SBA Communications,Real Estate,Communication Services,False,0.8
+SBUX,Starbucks,Consumer Discretionary,Consumer Staples,False,0.8
+SHW,Sherwin-Williams,Materials,Consumer Discretionary,True,0.8
+SLB,Schlumberger,Energy,Industrials,False,0.8
+TMUS,T-Mobile US,Communication Services,Information Technology,False,0.8
+TSLA,"Tesla, Inc.",Consumer Discretionary,Utilities,False,0.8
+VRSK,Verisk Analytics,Industrials,Financials,False,0.8
+VRSN,Verisign,Information Technology,Real Estate,False,0.8
+YUM,Yum! Brands,Consumer Discretionary,Consumer Staples,False,0.8
+AAPL,Apple Inc.,Information Technology,Consumer Discretionary,False,0.7
+ADP,Automatic Data Processing,Industrials,Information Technology,False,0.7
+ALB,Albemarle Corporation,Materials,Energy,True,0.7
+AMT,American Tower,Real Estate,Industrials,True,0.7
+AOS,A. O. Smith,Industrials,Consumer Staples,True,0.7
+AWK,American Water Works,Utilities,Industrials,True,0.7
+BKNG,Booking Holdings,Consumer Discretionary,Financials,False,0.7
+CARR,Carrier Global,Industrials,Financials,False,0.7
+CF,CF Industries,Materials,Industrials,True,0.7
+CMG,Chipotle Mexican Grill,Consumer Discretionary,Consumer Staples,False,0.7
+EL,Estée Lauder Companies (The),Consumer Staples,Health Care,False,0.7
+GEV,GE Vernova,Industrials,Utilities,False,0.7
+GLW,Corning Inc.,Information Technology,Materials,False,0.7
+GM,General Motors,Consumer Discretionary,Industrials,False,0.7
+HAS,Hasbro,Consumer Discretionary,Communication Services,True,0.7
+IT,Gartner,Information Technology,Financials,True,0.7
+JBL,Jabil,Information Technology,Industrials,False,0.7
+KVUE,Kenvue,Consumer Staples,Health Care,False,0.7
+LYB,LyondellBasell,Materials,Energy,True,0.7
+MAR,Marriott International,Consumer Discretionary,Real Estate,False,0.7
+MTD,Mettler Toledo,Health Care,Information Technology,False,0.7
+PCAR,Paccar,Industrials,Consumer Discretionary,True,0.7
+RL,Ralph Lauren Corporation,Consumer Discretionary,Consumer Staples,False,0.7
+ROL,"Rollins, Inc.",Industrials,Communication Services,True,0.7
+STE,Steris,Health Care,Industrials,False,0.7
+SW,Smurfit Westrock,Materials,Consumer Staples,False,0.7
+AXON,Axon Enterprise,Industrials,Information Technology,False,0.6
+AZO,AutoZone,Consumer Discretionary,Industrials,False,0.6
+BKR,Baker Hughes,Energy,Industrials,False,0.6
+CAT,Caterpillar Inc.,Industrials,Energy,True,0.6
+CSGP,CoStar Group,Real Estate,Financials,True,0.6
+DRI,Darden Restaurants,Consumer Discretionary,Consumer Staples,False,0.6
+EXE,Expand Energy,Energy,Utilities,False,0.6
+KLAC,KLA Corporation,Information Technology,Industrials,False,0.6
+LRCX,Lam Research,Information Technology,Industrials,True,0.6
+MCD,McDonald's,Consumer Discretionary,Consumer Staples,False,0.6
+MSI,Motorola Solutions,Information Technology,Industrials,True,0.6
+ORLY,O’Reilly Automotive,Consumer Discretionary,Industrials,False,0.6
+ROST,Ross Stores,Consumer Discretionary,Consumer Staples,False,0.6
+T,AT&T,Communication Services,Information Technology,False,0.6
+TEL,TE Connectivity,Information Technology,Industrials,True,0.6

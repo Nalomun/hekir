@@ -1,0 +1,56 @@
+sector_a,sector_b,count_a_to_b,count_b_to_a,lift_a_to_b,lift_b_to_a,diff_count,perm_mean_diff,p_raw,p_bh,significant_bh05,stronger_direction,p_raw_display,sender,receiver,count_stronger,count_weaker,sender_n,sender_cohesion_lift,receiver_n,receiver_cohesion_lift
+Communication Services,Consumer Discretionary,20,15,1.0374999999999999,0.778125,5,0.0654,0.42375762423757624,1.0,False,Communication Services -> Consumer Discretionary,0.4238,Communication Services,Consumer Discretionary,20,15,20,12.71,48,3.6
+Communication Services,Consumer Staples,0,0,0.0,0.0,0,0.0207,1.0,1.0,False,Consumer Staples -> Communication Services,1.0000,Consumer Staples,Communication Services,0,0,36,10.55,20,12.71
+Communication Services,Energy,0,0,0.0,0.0,0,0.0149,1.0,1.0,False,Energy -> Communication Services,1.0000,Energy,Communication Services,0,0,21,14.82,20,12.71
+Communication Services,Financials,16,2,0.5312,0.0664,14,-0.0277,0.07279272072792721,0.30796920307969206,False,Communication Services -> Financials,0.0728,Communication Services,Financials,16,2,20,12.71,75,5.7
+Communication Services,Health Care,5,1,0.21101694915254238,0.042203389830508475,4,0.1109,0.5911408859114089,1.0,False,Communication Services -> Health Care,0.5911,Communication Services,Health Care,5,1,20,12.71,59,7.44
+Communication Services,Industrials,13,4,0.40462499999999996,0.1245,9,-0.0186,0.266973302669733,0.7728174550965956,False,Communication Services -> Industrials,0.2670,Communication Services,Industrials,13,4,20,12.71,80,3.47
+Communication Services,Information Technology,44,20,1.5216666666666667,0.6916666666666667,24,0.0432,0.0027997200279972004,0.019248075192480753,True,Communication Services -> Information Technology,0.0028,Communication Services,Information Technology,44,20,20,12.71,72,4.95
+Communication Services,Materials,0,0,0.0,0.0,0,-0.0738,1.0,1.0,False,Materials -> Communication Services,1.0000,Materials,Communication Services,0,0,26,5.13,20,12.71
+Communication Services,Real Estate,5,8,0.40161290322580645,0.6425806451612903,-3,-0.0095,0.5498450154984501,1.0,False,Real Estate -> Communication Services,0.5498,Real Estate,Communication Services,8,5,31,10.71,20,12.71
+Communication Services,Utilities,0,0,0.0,0.0,0,0.0462,1.0,1.0,False,Utilities -> Communication Services,1.0000,Utilities,Communication Services,0,0,31,14.94,20,12.71
+Consumer Discretionary,Consumer Staples,97,34,2.7954861111111113,0.9798611111111112,63,-0.0094,9.999000099990002e-05,0.0010998900109989002,True,Consumer Discretionary -> Consumer Staples,p < 1/10001,Consumer Discretionary,Consumer Staples,97,34,48,3.6,36,10.55
+Consumer Discretionary,Energy,3,2,0.14821428571428572,0.0988095238095238,1,-0.0007,0.8661133886611339,1.0,False,Consumer Discretionary -> Energy,0.8661,Consumer Discretionary,Energy,3,2,48,3.6,21,14.82
+Consumer Discretionary,Financials,46,13,0.6363333333333333,0.17983333333333332,33,0.1124,0.015898410158984102,0.08744125587441257,False,Consumer Discretionary -> Financials,0.0159,Consumer Discretionary,Financials,46,13,48,3.6,75,5.7
+Consumer Discretionary,Health Care,3,4,0.052754237288135594,0.07033898305084746,-1,0.0374,0.9261073892610739,1.0,False,Health Care -> Consumer Discretionary,0.9261,Health Care,Consumer Discretionary,4,3,59,7.44,48,3.6
+Consumer Discretionary,Industrials,57,61,0.7392187499999999,0.7910937499999999,-4,0.0063,0.7689231076892311,1.0,False,Industrials -> Consumer Discretionary,0.7689,Industrials,Consumer Discretionary,61,57,80,3.47,48,3.6
+Consumer Discretionary,Information Technology,24,20,0.3458333333333333,0.2881944444444445,4,0.1735,0.7896210378962104,1.0,False,Consumer Discretionary -> Information Technology,0.7896,Consumer Discretionary,Information Technology,24,20,48,3.6,72,4.95
+Consumer Discretionary,Materials,7,9,0.2793269230769231,0.3591346153846154,-2,-0.0934,0.818018198180182,1.0,False,Materials -> Consumer Discretionary,0.8180,Materials,Consumer Discretionary,9,7,26,5.13,48,3.6
+Consumer Discretionary,Real Estate,53,22,1.7737903225806453,0.7362903225806452,31,0.0165,9.999000099990002e-05,0.0010998900109989002,True,Consumer Discretionary -> Real Estate,p < 1/10001,Consumer Discretionary,Real Estate,53,22,48,3.6,31,10.71
+Consumer Discretionary,Utilities,12,2,0.40161290322580645,0.06693548387096775,10,-0.0169,0.17848215178482152,0.613532396760324,False,Consumer Discretionary -> Utilities,0.1785,Consumer Discretionary,Utilities,12,2,48,3.6,31,14.94
+Consumer Staples,Energy,7,4,0.4611111111111111,0.2634920634920635,3,-0.0132,0.5273472652734726,1.0,False,Consumer Staples -> Energy,0.5273,Consumer Staples,Energy,7,4,36,10.55,21,14.82
+Consumer Staples,Financials,5,3,0.09222222222222222,0.05533333333333333,2,-0.0232,0.8486151384861513,1.0,False,Consumer Staples -> Financials,0.8486,Consumer Staples,Financials,5,3,36,10.55,75,5.7
+Consumer Staples,Health Care,24,6,0.5627118644067797,0.14067796610169492,18,0.0694,0.0627937206279372,0.28780455287804546,False,Consumer Staples -> Health Care,0.0628,Consumer Staples,Health Care,24,6,36,10.55,59,7.44
+Consumer Staples,Industrials,5,20,0.08645833333333333,0.3458333333333333,-15,-0.0127,0.20527947205279473,0.6272428312724283,False,Industrials -> Consumer Staples,0.2053,Industrials,Consumer Staples,20,5,80,3.47,36,10.55
+Consumer Staples,Information Technology,0,1,0.0,0.019212962962962963,-1,0.0889,0.9232076792320768,1.0,False,Information Technology -> Consumer Staples,0.9232,Information Technology,Consumer Staples,1,0,72,4.95,36,10.55
+Consumer Staples,Materials,14,49,0.7448717948717949,2.607051282051282,-35,-0.0253,9.999000099990002e-05,0.0010998900109989002,True,Materials -> Consumer Staples,p < 1/10001,Materials,Consumer Staples,49,14,26,5.13,36,10.55
+Consumer Staples,Real Estate,2,1,0.08924731182795698,0.04462365591397849,1,-0.0125,0.8781121887811218,1.0,False,Consumer Staples -> Real Estate,0.8781,Consumer Staples,Real Estate,2,1,36,10.55,31,10.71
+Consumer Staples,Utilities,2,1,0.08924731182795698,0.04462365591397849,1,-0.0247,0.867013298670133,1.0,False,Consumer Staples -> Utilities,0.8670,Consumer Staples,Utilities,2,1,36,10.55,31,14.94
+Energy,Financials,2,2,0.06323809523809523,0.06323809523809523,0,-0.0349,1.0,1.0,False,Financials -> Energy,1.0000,Financials,Energy,2,2,75,5.7,21,14.82
+Energy,Health Care,0,0,0.0,0.0,0,0.0452,1.0,1.0,False,Health Care -> Energy,1.0000,Health Care,Energy,0,0,59,7.44,21,14.82
+Energy,Industrials,26,22,0.7707142857142857,0.6521428571428571,4,0.0132,0.6739326067393261,1.0,False,Energy -> Industrials,0.6739,Energy,Industrials,26,22,21,14.82,80,3.47
+Energy,Information Technology,1,0,0.03293650793650794,0.0,1,0.069,0.9487051294870513,1.0,False,Energy -> Information Technology,0.9487,Energy,Information Technology,1,0,21,14.82,72,4.95
+Energy,Materials,1,17,0.09120879120879122,1.5505494505494506,-16,-0.0045,0.0005999400059994001,0.005499450054994501,True,Materials -> Energy,0.0006,Materials,Energy,17,1,26,5.13,21,14.82
+Energy,Real Estate,0,1,0.0,0.07649769585253456,-1,-0.0191,0.9075092490750925,1.0,False,Real Estate -> Energy,0.9075,Real Estate,Energy,1,0,31,10.71,21,14.82
+Energy,Utilities,49,14,3.7483870967741937,1.070967741935484,35,0.0059,9.999000099990002e-05,0.0010998900109989002,True,Energy -> Utilities,p < 1/10001,Energy,Utilities,49,14,21,14.82,31,14.94
+Financials,Health Care,8,14,0.09003389830508474,0.1575593220338983,-6,0.0472,0.6895310468953104,1.0,False,Health Care -> Financials,0.6895,Health Care,Financials,14,8,59,7.44,75,5.7
+Financials,Industrials,53,79,0.43989999999999996,0.6557,-26,-0.1386,0.16378362163783622,0.6005399460053994,False,Industrials -> Financials,0.1638,Industrials,Financials,79,53,80,3.47,75,5.7
+Financials,Information Technology,15,18,0.13833333333333334,0.166,-3,0.0869,0.8611138886111389,1.0,False,Information Technology -> Financials,0.8611,Information Technology,Financials,18,15,72,4.95,75,5.7
+Financials,Materials,2,14,0.051076923076923075,0.3575384615384615,-12,-0.1458,0.2044795520447955,0.6272428312724283,False,Materials -> Financials,0.2045,Materials,Financials,14,2,26,5.13,75,5.7
+Financials,Real Estate,14,58,0.2998709677419355,1.2423225806451612,-44,-0.2202,9.999000099990002e-05,0.0010998900109989002,True,Real Estate -> Financials,p < 1/10001,Real Estate,Financials,58,14,31,10.71,75,5.7
+Financials,Utilities,3,1,0.06425806451612903,0.021419354838709676,2,-0.137,0.8422157784221578,1.0,False,Financials -> Utilities,0.8422,Financials,Utilities,3,1,75,5.7,31,14.94
+Health Care,Industrials,34,28,0.358728813559322,0.2954237288135593,6,-0.2413,0.7021297870212979,1.0,False,Health Care -> Industrials,0.7021,Health Care,Industrials,34,28,59,7.44,80,3.47
+Health Care,Information Technology,18,19,0.21101694915254238,0.2227401129943503,-1,0.0541,0.944005599440056,1.0,False,Information Technology -> Health Care,0.9440,Information Technology,Health Care,19,18,72,4.95,59,7.44
+Health Care,Materials,2,23,0.06492829204693612,0.7466753585397653,-21,-0.0872,0.009099090090990901,0.055605550556055504,False,Materials -> Health Care,0.0091,Materials,Health Care,23,2,26,5.13,59,7.44
+Health Care,Real Estate,0,1,0.0,0.02722799343903773,-1,0.0138,0.9036096390360964,1.0,False,Real Estate -> Health Care,0.9036,Real Estate,Health Care,1,0,31,10.71,59,7.44
+Health Care,Utilities,0,1,0.0,0.02722799343903773,-1,-0.0845,0.9516048395160484,1.0,False,Utilities -> Health Care,0.9516,Utilities,Health Care,1,0,31,14.94,59,7.44
+Industrials,Information Technology,79,106,0.6830208333333333,0.9164583333333333,-27,0.3627,0.125987401259874,0.494950504949505,False,Information Technology -> Industrials,0.1260,Information Technology,Industrials,106,79,72,4.95,80,3.47
+Industrials,Materials,23,58,0.5506730769230769,1.3886538461538462,-35,-0.0547,0.0006999300069993001,0.005499450054994501,True,Materials -> Industrials,0.0007,Materials,Industrials,58,23,26,5.13,80,3.47
+Industrials,Real Estate,10,8,0.20080645161290323,0.16064516129032258,2,0.0611,0.8883111688831117,1.0,False,Industrials -> Real Estate,0.8883,Industrials,Real Estate,10,8,80,3.47,31,10.71
+Industrials,Utilities,34,12,0.682741935483871,0.24096774193548387,22,0.0418,0.040695930406959305,0.2034796520347965,False,Industrials -> Utilities,0.0407,Industrials,Utilities,34,12,80,3.47,31,14.94
+Information Technology,Materials,11,18,0.29262820512820514,0.47884615384615387,-7,-0.2057,0.45245475452454753,1.0,False,Materials -> Information Technology,0.4525,Materials,Information Technology,18,11,26,5.13,72,4.95
+Information Technology,Real Estate,8,8,0.17849462365591395,0.17849462365591395,0,-0.134,1.0,1.0,False,Real Estate -> Information Technology,1.0000,Real Estate,Information Technology,8,8,31,10.71,72,4.95
+Information Technology,Utilities,9,0,0.20080645161290323,0.0,9,-0.1047,0.34896510348965104,0.9596540345965403,False,Information Technology -> Utilities,0.3490,Information Technology,Utilities,9,0,72,4.95,31,14.94
+Materials,Real Estate,0,0,0.0,0.0,0,0.0209,1.0,1.0,False,Real Estate -> Materials,1.0000,Real Estate,Materials,0,0,31,10.71,26,5.13
+Materials,Utilities,5,0,0.3089330024813896,0.0,5,0.0736,0.36796320367963203,0.9637131524942744,False,Materials -> Utilities,0.3680,Materials,Utilities,5,0,26,5.13,31,14.94
+Real Estate,Utilities,3,0,0.1554630593132154,0.0,3,-0.0352,0.5877412258774123,1.0,False,Real Estate -> Utilities,0.5877,Real Estate,Utilities,3,0,31,10.71,31,14.94

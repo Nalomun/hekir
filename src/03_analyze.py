@@ -6,117 +6,118 @@ The core investigation. Uses exact cosine k-NN (src/knn.py) to answer:
    or do business descriptions reveal peer structure that sector labels miss?"
 
 Produces result tables:
-  data/neighbors.csv            : top-K neighbors per company
-  data/cross_sector_by_sector.csv : how 'porous' each sector is
-  data/sector_affinity.csv      : sector -> neighbor-sector affinity matrix (row %)
-  data/mislabeled.csv           : companies whose semantic peers mostly sit elsewhere
+  data/neighbors.csv               : top-K neighbors per company
+  data/headline.json               : overall in-sector rate vs chance
+  data/cross_sector_by_sector.csv  : how 'porous' each sector is
+  data/sector_cohesion.csv         : self-retention vs per-sector chance (Table 2 / fig4)
+  data/sector_affinity.csv         : sector -> neighbor-sector shares (row %, descriptive)
+  data/sector_affinity_lift.csv    : observed / expected (firm-count baseline)
+  data/sector_affinity_tests.csv   : per-cell counts, lift, raw and BH-adjusted p
+  data/sector_asymmetry_tests.csv  : per-pair C[a->b] vs C[b->a] test, raw and BH p
+  data/mismatch_candidates.csv     : firms whose semantic peers mostly sit elsewhere
+  data/mismatch_threshold_counts.csv
 """
+import json
+
 import numpy as np
 import pandas as pd
 
 from knn import exact_knn
+import gics_lib as g
 
-K = 10   # neighbors used for metrics (discretionary)
+K = 10            # neighbors used for metrics (discretionary)
+N_PERM = 10_000   # label permutations for the significance tests
+SEED = 42
+CANDIDATE_THRESHOLD = 0.6   # cross-sector rate; see mismatch_threshold_counts.csv
 
 
 def main():
     meta = pd.read_csv("data/meta.csv")
     vecs = np.load("data/embeddings.npy")
-    sectors = sorted(meta["sector"].unique())
+    sectors, codes = g.sector_codes(meta)
 
     idx, scores = exact_knn(vecs, K)
-    rows = []
-    for i, r in meta.iterrows():
-        for rank, (j, sc) in enumerate(zip(idx[i], scores[i]), 1):
-            nbr = meta.iloc[j]
-            rows.append({
-                "ticker": r["ticker"], "sector": r["sector"], "rank": rank,
-                "nbr_ticker": nbr["ticker"], "nbr_name": nbr["name"],
-                "nbr_sector": nbr["sector"], "score": round(float(sc), 4),
-                "cross": nbr["sector"] != r["sector"],
-            })
-    nb = pd.DataFrame(rows)
+    nb = g.neighbor_table(meta, idx, scores)
     nb.to_csv("data/neighbors.csv", index=False)
 
-    overall = nb["cross"].mean()
-    print(f"Overall cross-sector neighbor rate: {overall:.1%}")
+    head = g.headline(codes, idx)
 
-    # how porous is each sector (share of its companies' neighbors in OTHER sectors)
     by_sector = (nb.groupby("sector")["cross"].mean()
                    .sort_values(ascending=False).rename("cross_sector_rate"))
     by_sector.to_csv("data/cross_sector_by_sector.csv")
+    cohesion = g.sector_cohesion(meta, idx)
+    cohesion.to_csv("data/sector_cohesion.csv", index=False)
+
+    # descriptive "where do neighbors land" table (row %). Divides out the
+    # SENDING sector only, so it is NOT a measure of affinity on its own.
+    aff = (pd.crosstab(nb["sector"], nb["nbr_sector"], normalize="index") * 100).round(1)
+    aff.reindex(index=sectors, columns=sectors, fill_value=0).to_csv("data/sector_affinity.csv")
+
+    # ---- significance: firm-label permutation null ---------------------------
+    # The kNN graph is fixed; sector labels are permuted across the N firms and
+    # the full crosstab is recomputed each time. Each cell is compared with its
+    # own permutation distribution (centered on the permuted mean), two-sided.
+    # Benjamini-Hochberg across the 110 off-diagonal cells.
+    res = g.permutation_test(codes, idx, len(sectors), n_perm=N_PERM, seed=SEED)
+    cells = g.cell_tests(sectors, codes, idx, res)
+    cells.to_csv("data/sector_affinity_tests.csv", index=False)
+    (cells.pivot(index="from_sector", columns="to_sector", values="lift")
+          .reindex(index=sectors, columns=sectors).round(3)
+          .to_csv("data/sector_affinity_lift.csv"))
+    asym = g.asymmetry_tests(sectors, codes, idx, res)
+    # size and size-adjusted cohesion of the sending ("donor") and receiving
+    # ("attractor") side of each pair's stronger direction
+    a_is_sender = asym["diff_count"] > 0
+    asym["sender"] = np.where(a_is_sender, asym["sector_a"], asym["sector_b"])
+    asym["receiver"] = np.where(a_is_sender, asym["sector_b"], asym["sector_a"])
+    asym["count_stronger"] = np.where(a_is_sender, asym["count_a_to_b"], asym["count_b_to_a"])
+    asym["count_weaker"] = np.where(a_is_sender, asym["count_b_to_a"], asym["count_a_to_b"])
+    coh = cohesion.set_index("sector")
+    for side in ("sender", "receiver"):
+        asym[f"{side}_n"] = asym[side].map(coh["n"])
+        asym[f"{side}_cohesion_lift"] = asym[side].map(coh["lift"]).round(2)
+    asym.to_csv("data/sector_asymmetry_tests.csv", index=False)
+
+    head.update({"k": K, "n_perm": N_PERM, "seed": SEED,
+                 "p_in_sector": res["p_in_sector"],
+                 "offdiag_cells": int((~cells["diagonal"]).sum()),
+                 "offdiag_sig_bh05": int(cells["significant_bh05"].sum()),
+                 "offdiag_sig_bh05_above": int((cells["significant_bh05"] & (cells["lift"] > 1)).sum()),
+                 "offdiag_sig_bh05_below": int((cells["significant_bh05"] & (cells["lift"] < 1)).sum()),
+                 "asym_pairs": len(asym), "asym_sig_bh05": int(asym["significant_bh05"].sum())})
+    with open("data/headline.json", "w") as f:
+        json.dump(head, f, indent=2)
+
+    print(f"N = {head['N']} firms, k = {K}")
+    print(f"In-sector neighbor rate: {head['in_sector_rate']:.1%} vs chance "
+          f"{head['chance_rate']:.1%} ({head['in_sector_lift']:.1f}x; "
+          f"{g.format_p(res['p_in_sector'], N_PERM)})")
     print("\nMost porous sectors (semantic peers leak out):")
     print((by_sector * 100).round(1).to_string())
+    print(f"\nOff-diagonal cells significant after BH (q<0.05): "
+          f"{head['offdiag_sig_bh05']} of {head['offdiag_cells']} "
+          f"({head['offdiag_sig_bh05_above']} above chance, "
+          f"{head['offdiag_sig_bh05_below']} below), {N_PERM} permutations")
+    print(f"Directional asymmetries significant after BH: "
+          f"{head['asym_sig_bh05']} of {head['asym_pairs']} sector pairs")
+    sig = asym[asym["significant_bh05"]]
+    print(sig[["sender", "receiver", "count_stronger", "count_weaker", "p_bh", "sender_n", "receiver_n",
+               "sender_cohesion_lift", "receiver_cohesion_lift"]].round(4).to_string(index=False))
+    print(f"  receiver larger than sender: {(sig['receiver_n'] > sig['sender_n']).sum()} of {len(sig)}; "
+          f"receiver more cohesive (size-adjusted): "
+          f"{(sig['receiver_cohesion_lift'] > sig['sender_cohesion_lift']).sum()} of {len(sig)}")
 
-    # sector -> neighbor-sector affinity, row-normalized to %
-    # NOTE: row-% (normalize="index") divides out the SENDING sector but not the
-    # RECEIVING one, so a large sector grabs a bigger share of every row purely
-    # because it has more firms to be a neighbor. Kept as the descriptive "where
-    # do neighbors land" table, but it is NOT a measure of affinity on its own.
-    aff = (pd.crosstab(nb["sector"], nb["nbr_sector"], normalize="index") * 100).round(1)
-    aff = aff.reindex(index=sectors, columns=sectors, fill_value=0)
-    aff.to_csv("data/sector_affinity.csv")
-
-    # ---- size-corrected affinity: lift over a chance baseline -----------------
-    # Expected share of sector i's neighbors that land in sector j, if neighbors
-    # were drawn at random from the other N-1 firms:
-    #     expected_share[i->j] = (count_j - [i==j]) / (N - 1)
-    # The (-[i==j]) drops the firm itself from its own sector's pool, so the
-    # diagonal of this baseline is exactly the (n-1)/(N-1) chance term used in
-    # make_fig4.py. lift = observed / expected:  1.0 = chance, >1 = attraction,
-    # <1 = avoidance. This removes the receiving-sector size confound.
-    counts = meta["sector"].value_counts()
-    N = len(meta)
-    expected = pd.DataFrame(
-        {j: {i: 100 * (counts[j] - (1 if i == j else 0)) / (N - 1)
-             for i in sectors} for j in sectors}
-    ).reindex(index=sectors, columns=sectors)
-    lift = (aff / expected).round(3)
-    lift.to_csv("data/sector_affinity_lift.csv")
-
-    # ---- significance: label-permutation null for each cell -------------------
-    # Shuffle neighbor-sector labels (preserving each sector's neighbor count),
-    # recompute the lift matrix, and ask how often the shuffled lift is at least
-    # as extreme as the observed one. Two-sided empirical p-value per cell.
-    rng = np.random.default_rng(42)
-    n_perm = 2000
-    obs_counts = pd.crosstab(nb["sector"], nb["nbr_sector"]).reindex(
-        index=sectors, columns=sectors, fill_value=0)
-    row_tot = obs_counts.sum(axis=1)
-    exp_counts = expected.div(100).mul(row_tot, axis=0)   # expected COUNTS per cell
-    obs_dev = (obs_counts - exp_counts).abs()
-    nbr_labels = nb["nbr_sector"].to_numpy()
-    sender = nb["sector"].to_numpy()
-    ge = pd.DataFrame(0, index=sectors, columns=sectors)
-    for _ in range(n_perm):
-        shuffled = rng.permutation(nbr_labels)
-        ct = pd.crosstab(pd.Series(sender), pd.Series(shuffled)).reindex(
-            index=sectors, columns=sectors, fill_value=0)
-        dev = (ct - exp_counts).abs()
-        ge += (dev >= obs_dev).astype(int)
-    pval = ((ge + 1) / (n_perm + 1)).round(4)
-    pval.to_csv("data/sector_affinity_pvalue.csv")
-    sig = (pval < 0.05).sum().sum()
-    print(f"\nSize-corrected affinity (lift) written; {sig} of {pval.size} "
-          f"cells differ from chance at p<0.05 ({n_perm} permutations).")
-
-    # companies whose neighbors mostly sit in a DIFFERENT, single sector = case studies
-    mis = []
-    for tkr, g in nb.groupby("ticker"):
-        own = g["sector"].iloc[0]
-        top_nbr_sector = g["nbr_sector"].mode().iloc[0]
-        cross_rate = g["cross"].mean()
-        if cross_rate >= 0.6 and top_nbr_sector != own:
-            mis.append({
-                "ticker": tkr, "name": meta.loc[meta.ticker == tkr, "name"].iloc[0],
-                "gics_sector": own, "semantic_sector": top_nbr_sector,
-                "cross_rate": round(cross_rate, 2),
-            })
-    mis = pd.DataFrame(mis).sort_values("cross_rate", ascending=False)
-    mis.to_csv("data/mislabeled.csv", index=False)
-    print(f"\n{len(mis)} companies whose semantic peers mostly sit in another sector.")
-    print("Top mismatches (great case studies for your write-up):")
-    print(mis.head(12).to_string(index=False))
+    # ---- firms whose neighbors mostly sit in a DIFFERENT, single sector -------
+    mt = g.mismatch_table(nb).merge(meta[["ticker", "name"]], on="ticker")
+    g.threshold_counts(mt).to_csv("data/mismatch_threshold_counts.csv", index=False)
+    cand = mt[(mt["cross_rate"] >= CANDIDATE_THRESHOLD - 1e-9)
+              & (mt["semantic_sector"] != mt["gics_sector"])]
+    cand = (cand[["ticker", "name", "gics_sector", "semantic_sector", "modal_tie", "cross_rate"]]
+            .sort_values(["cross_rate", "ticker"], ascending=[False, True]))
+    cand.to_csv("data/mismatch_candidates.csv", index=False)
+    print(f"\n{len(cand)} mismatch candidates at cross-sector rate >= {CANDIDATE_THRESHOLD}")
+    print(g.threshold_counts(mt).to_string(index=False))
+    print(cand.head(12).to_string(index=False))
 
 
 if __name__ == "__main__":
