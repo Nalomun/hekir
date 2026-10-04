@@ -67,7 +67,7 @@ sns.heatmap(log_lift, mask=mask, annot=annot.values, fmt="", cmap="RdBu_r",
 # grey out the masked diagonal so it reads as "n/a, see fig4" not "missing"
 ax.set_facecolor("#F1F5F9")
 ax.set_title("Cross-sector semantic affinity, corrected for sector size\n"
-             "(lift over a firm-count baseline; diagonal = self-retention, shown in fig4;\n"
+             "(lift over a firm-count baseline; diagonal = self-retention, shown separately;\n"
              "· = not distinguishable from chance, BH-adjusted p ≥ 0.05)",
              loc="left", fontsize=11)
 ax.set_xlabel("Neighbor sector"); ax.set_ylabel("Company's GICS sector")
