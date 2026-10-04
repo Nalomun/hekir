@@ -1,7 +1,7 @@
 """
 03_analyze.py
 -------------
-The core investigation. Uses Qdrant k-NN to answer:
+The core investigation. Uses exact cosine k-NN (src/knn.py) to answer:
   "Do a company's nearest semantic neighbors stay within its GICS sector,
    or do business descriptions reveal peer structure that sector labels miss?"
 
@@ -13,29 +13,27 @@ Produces result tables:
 """
 import numpy as np
 import pandas as pd
-from qdrant_client import QdrantClient
 
-COLLECTION = "sp500_companies"
-QDRANT_URL = "http://localhost:6333"
+from knn import exact_knn
+
 K = 10   # neighbors used for metrics (discretionary)
 
 
 def main():
     meta = pd.read_csv("data/meta.csv")
     vecs = np.load("data/embeddings.npy")
-    client = QdrantClient(url=QDRANT_URL)
     sectors = sorted(meta["sector"].unique())
 
+    idx, scores = exact_knn(vecs, K)
     rows = []
     for i, r in meta.iterrows():
-        pts = client.query_points(COLLECTION, query=vecs[i].tolist(), limit=K + 1).points
-        nbrs = [p for p in pts if p.id != i][:K]
-        for rank, p in enumerate(nbrs, 1):
+        for rank, (j, sc) in enumerate(zip(idx[i], scores[i]), 1):
+            nbr = meta.iloc[j]
             rows.append({
                 "ticker": r["ticker"], "sector": r["sector"], "rank": rank,
-                "nbr_ticker": p.payload["ticker"], "nbr_name": p.payload["name"],
-                "nbr_sector": p.payload["sector"], "score": round(p.score, 4),
-                "cross": p.payload["sector"] != r["sector"],
+                "nbr_ticker": nbr["ticker"], "nbr_name": nbr["name"],
+                "nbr_sector": nbr["sector"], "score": round(float(sc), 4),
+                "cross": nbr["sector"] != r["sector"],
             })
     nb = pd.DataFrame(rows)
     nb.to_csv("data/neighbors.csv", index=False)
