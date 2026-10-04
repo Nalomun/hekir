@@ -23,3 +23,6 @@ qdrant_storage/
 .DS_Store
 .idea/
 .vscode/
+
+# --- Licensed market data (Yahoo Finance via yfinance); never commit ---
+data/prices/
