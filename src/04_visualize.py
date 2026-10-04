@@ -4,7 +4,8 @@
 Builds the figures for the report (all saved to figures/):
   fig1_umap.png            : embedding space colored by GICS sector
   fig2_affinity_heatmap.png: sector -> neighbor-sector affinity
-  fig3_case_studies.png    : a few mismatched companies + their semantic neighbors
+  fig3_case_studies.png    : the case-study firms + their nearest semantic neighbors
+and data/case_studies.csv (Table 1: top-5 neighbor cosine range per case study).
 """
 import numpy as np
 import pandas as pd
@@ -40,12 +41,17 @@ plt.tight_layout(); plt.savefig("figures/fig1_umap.png", dpi=150); plt.close()
 # Raw row-% conflates affinity with receiving-sector size, so we plot lift =
 # observed / expected on a log2 scale: 0 = chance, +1 = 2x attraction,
 # -1 = 2x avoidance. Diverging colormap centered at chance. Cells that are not
-# distinguishable from chance (permutation p>=0.05) are annotated with a dot.
+# distinguishable from chance (BH-adjusted permutation p>=0.05) get a dot.
 lift = pd.read_csv("data/sector_affinity_lift.csv", index_col=0)
-pval = pd.read_csv("data/sector_affinity_pvalue.csv", index_col=0).reindex(
-    index=lift.index, columns=lift.columns)
-log_lift = np.log2(lift.replace(0, np.nan))            # log scale; 0-cells -> blank
-annot = lift.round(1).astype(str) + np.where(pval < 0.05, "", " ·")
+tests = pd.read_csv("data/sector_affinity_tests.csv")
+pval = (tests.pivot(index="from_sector", columns="to_sector", values="p_bh")
+             .reindex(index=lift.index, columns=lift.columns))
+# Cells with zero observed neighbors have log2(lift) = -inf; draw them at the
+# bottom of the color scale and label them "0" so they are not mistaken for the
+# masked diagonal.
+log_lift = np.log2(lift.where(lift > 0, 2.0 ** -2.0))
+annot = (lift.round(1).astype(str).where(lift > 0, "0")
+         + np.where(pval < 0.05, "", " ·"))
 # Mask the diagonal: self-retention lift (3-15x) dominates the scale and is
 # already the subject of fig4. Masking it lets the cross-sector affinities show.
 mask = np.eye(len(log_lift), dtype=bool)
@@ -61,16 +67,27 @@ sns.heatmap(log_lift, mask=mask, annot=annot.values, fmt="", cmap="RdBu_r",
 # grey out the masked diagonal so it reads as "n/a, see fig4" not "missing"
 ax.set_facecolor("#F1F5F9")
 ax.set_title("Cross-sector semantic affinity, corrected for sector size\n"
-             "(lift over a firm-count baseline; diagonal=self-retention shown in fig4;  "
-             "· = not distinguishable from chance, p≥0.05)",
+             "(lift over a firm-count baseline; diagonal = self-retention, shown in fig4;\n"
+             "· = not distinguishable from chance, BH-adjusted p ≥ 0.05)",
              loc="left", fontsize=11)
 ax.set_xlabel("Neighbor sector"); ax.set_ylabel("Company's GICS sector")
 plt.tight_layout(); plt.savefig("figures/fig2_affinity_heatmap.png", dpi=150); plt.close()
 
-# ---- Fig 3: case-study neighbor tables ----
+# ---- Table 1 data + Fig 3: case-study neighbor tables ----
+CASE_STUDIES = ["BRK.B", "BR", "ECL", "APTV"]   # Table 1; Figure 3 shows the first three
 nb = pd.read_csv("data/neighbors.csv")
-mis = pd.read_csv("data/mislabeled.csv")
-picks = mis.head(3)["ticker"].tolist() if len(mis) else nb["ticker"].unique()[:3].tolist()
+cand = pd.read_csv("data/mismatch_candidates.csv").set_index("ticker")
+rows = []
+for tkr in CASE_STUDIES:
+    g5 = nb[nb["ticker"] == tkr].head(5)
+    rows.append({"ticker": tkr, "gics_sector": g5["sector"].iloc[0],
+                 "is_candidate": tkr in cand.index,
+                 "semantic_sector": cand["semantic_sector"].get(tkr),
+                 "cross_rate_k10": round(nb.loc[nb["ticker"] == tkr, "cross"].mean(), 2),
+                 "top5_cos_min": g5["score"].min(), "top5_cos_max": g5["score"].max(),
+                 "top5_neighbors": "; ".join(f"{t} ({s})" for t, s in zip(g5["nbr_ticker"], g5["nbr_sector"]))})
+pd.DataFrame(rows).to_csv("data/case_studies.csv", index=False)
+picks = CASE_STUDIES[:3]
 fig, axes = plt.subplots(len(picks), 1, figsize=(9, 2.2 * len(picks)))
 if len(picks) == 1:
     axes = [axes]

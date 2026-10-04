@@ -1,0 +1,5 @@
+ticker,gics_sector,is_candidate,semantic_sector,cross_rate_k10,top5_cos_min,top5_cos_max,top5_neighbors
+BRK.B,Financials,True,Industrials,1.0,0.5365,0.5807,GPC (Consumer Discretionary); WAB (Industrials); TSCO (Consumer Discretionary); NSC (Industrials); ETN (Industrials)
+BR,Industrials,True,Financials,1.0,0.6097,0.6197,NTRS (Financials); BAC (Financials); IBM (Information Technology); STT (Financials); RJF (Financials)
+ECL,Materials,True,Health Care,0.9,0.4461,0.5475,CLX (Consumer Staples); WAT (Health Care); A (Health Care); IFF (Materials); BAC (Financials)
+APTV,Consumer Discretionary,True,Information Technology,1.0,0.4539,0.5048,ROK (Industrials); AIZ (Financials); EIX (Utilities); INTC (Information Technology); ANET (Information Technology)
