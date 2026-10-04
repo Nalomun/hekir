@@ -39,7 +39,7 @@ firm-label permutations.
   coherent sector" rule.
 - **Embedding peers co-move more than same-sector peers.** Mean daily-return
   correlation with the 10 embedding peers is 0.335, against 0.275 for the
-  firm's GICS sector (difference +0.060, 95% CI 0.050–0.070; higher for 72% of
+  firm's GICS sector (difference +0.060, 95% CI 0.050–0.069; higher for 72% of
   493 firms; 2025-07-01 to 2026-06-30). The gap is similar on market-residual
   returns (+0.070).
 - **For mismatch candidates, the advantage disappears.** These are the 83
