@@ -1,0 +1,3 @@
+# Optional: only for src/02b_load_qdrant.py (load vectors into Qdrant and
+# check its neighbors against the exact numpy kNN).
+qdrant-client==1.18.0

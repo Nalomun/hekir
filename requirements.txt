@@ -1,10 +1,14 @@
-pandas
-numpy
-lxml
-yfinance
-sentence-transformers
-qdrant-client
-umap-learn
-scikit-learn
-matplotlib
-seaborn
+# Versions used for the results in this repository (Python 3.13).
+numpy==2.4.6
+pandas==2.2.3
+scipy==1.17.1
+requests==2.32.4
+lxml==5.3.2
+yfinance==1.4.1
+sentence-transformers==5.5.1
+transformers==5.12.1
+torch==2.12.0
+umap-learn==0.5.12
+scikit-learn==1.9.0
+matplotlib==3.11.0
+seaborn==0.13.2
