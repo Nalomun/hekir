@@ -29,3 +29,7 @@ data/prices/
 
 # Pre-edit backup of the paper source (kept locally only)
 Beyond_GICS_Vector_Search_Comparables.pre-edit.docx
+
+# Local working notes (kept out of the repo)
+FLAGGED.md
+HANDOFF.md
