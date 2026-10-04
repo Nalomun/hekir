@@ -42,12 +42,13 @@ firm-label permutations.
   firm's GICS sector (difference +0.060, 95% CI 0.050–0.070; higher for 72% of
   493 firms; 2025-07-01 to 2026-06-30). The gap is similar on market-residual
   returns (+0.070).
-- **For mismatch candidates, the advantage disappears.** These are firms whose
-  neighbors mostly sit in one other sector. Their embedding peers co-move no
-  more than their GICS sector peers at any cross-rate threshold from 0.6 to
-  0.9 (at 0.6: −0.007, 95% CI −0.027 to 0.014, n = 98). The candidate list
-  marks where descriptions and labels disagree. It does not show that GICS
-  misplaces these firms.
+- **For mismatch candidates, the advantage disappears.** These are the 83
+  firms with at least 70% of neighbors outside their own sector and a
+  different modal sector. Their embedding peers co-move no more than their
+  GICS sector peers (−0.014, 95% CI −0.036 to 0.010). No threshold from 0.6
+  to 0.9 gives a significant difference. The candidate list marks where
+  descriptions and labels disagree. It does not show that GICS misplaces
+  these firms.
 
 ## Pipeline
 
@@ -84,9 +85,9 @@ firm-label permutations.
   mean (two-sided; the smallest attainable p is 1/10001). Benjamini-Hochberg is
   applied across the 110 off-diagonal cells. Directional asymmetry,
   C[a→b] − C[b→a], is tested the same way across the 55 sector pairs.
-- **Mismatch candidates:** cross-sector rate at or above a threshold, with a
-  modal neighbor sector other than the firm's own. Counts at 0.6 / 0.7 / 0.8 /
-  0.9 are in `data/mismatch_threshold_counts.csv`.
+- **Mismatch candidates:** cross-sector rate of at least 0.7, with a modal
+  neighbor sector other than the firm's own (83 firms). Counts at 0.6 / 0.7 /
+  0.8 / 0.9 are 98 / 83 / 57 / 27 (`data/mismatch_threshold_counts.csv`).
 - **Co-movement:** simple daily returns from adjusted closes. Firms need at
   least 200 returns in the window (493 qualify). Each firm's mean correlation
   with its embedding peers is compared with its mean correlation with all
@@ -112,6 +113,47 @@ pip install -r requirements.txt
 The repository ships with `data/companies.csv` (June 2026 snapshot) and all
 derived outputs. Price data is downloaded locally on first run and is never
 committed.
+
+## Related work
+
+Hoberg and Phillips (2010, 2016) measure product similarity as the cosine
+between word vectors drawn from each firm's full 10-K business description,
+recomputed annually across all public firms to build time-varying competitor
+networks. This study instead applies a pretrained sentence-embedding model to
+the short yfinance summaries of S&P 500 firms at a single point in time, and
+uses the resulting neighbors to test GICS sectors and return co-movement rather
+than to build a replacement classification.
+
+## References
+
+- Benjamini, Y., & Hochberg, Y. (1995). Controlling the false discovery rate: A
+  practical and powerful approach to multiple testing. *Journal of the Royal
+  Statistical Society: Series B (Methodological)*, 57(1), 289–300.
+  https://doi.org/10.1111/j.2517-6161.1995.tb02031.x
+- Bhojraj, S., Lee, C. M. C., & Oler, D. K. (2003). What's my line? A comparison
+  of industry classification schemes for capital market research. *Journal of
+  Accounting Research*, 41(5), 745–774.
+  https://doi.org/10.1046/j.1475-679X.2003.00122.x
+- Hoberg, G., & Phillips, G. (2010). Product market synergies and competition in
+  mergers and acquisitions: A text-based analysis. *Review of Financial
+  Studies*, 23(10), 3773–3811. https://doi.org/10.1093/rfs/hhq053
+- Hoberg, G., & Phillips, G. (2016). Text-based network industries and
+  endogenous product differentiation. *Journal of Political Economy*, 124(5),
+  1423–1465. https://doi.org/10.1086/688176
+- Hoberg, G., & Phillips, G. Hoberg-Phillips Data Library.
+  https://hobergphillips.tuck.dartmouth.edu/ (accessed 4 October 2026)
+- Lee, C. M. C., Ma, P., & Wang, C. C. Y. (2015). Search-based peer firms:
+  Aggregating investor perceptions through internet co-searches. *Journal of
+  Financial Economics*, 116(2), 410–431.
+  https://doi.org/10.1016/j.jfineco.2015.02.003
+- Reimers, N., & Gurevych, I. (2019). Sentence-BERT: Sentence embeddings using
+  Siamese BERT-networks. In *Proceedings of the 2019 Conference on Empirical
+  Methods in Natural Language Processing and the 9th International Joint
+  Conference on Natural Language Processing (EMNLP-IJCNLP)* (pp. 3982–3992).
+  Association for Computational Linguistics. https://doi.org/10.18653/v1/D19-1410
+- sentence-transformers/all-MiniLM-L6-v2 [model card]. Hugging Face.
+  https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2 (accessed 4
+  October 2026)
 
 ## License
 
