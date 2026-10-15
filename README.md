@@ -22,7 +22,7 @@ N = 499 companies (dual-class listings merged), k = 10 neighbors, 10,000
 firm-label permutations.
 
 - **66.0% of nearest semantic neighbors fall in the firm's own GICS sector,
-  against 11.0% expected by chance (6.0×; p < 1/10001).** The embeddings recover
+  against 11.0% expected by chance (6.0×; p < 0.0001).** The embeddings recover
   sector structure strongly.
 - **Cohesion varies by sector once size is accounted for.** Self-retention as a
   multiple of each sector's own chance rate runs from Utilities (14.9×) and

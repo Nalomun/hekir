@@ -119,7 +119,11 @@ def bh(p: np.ndarray) -> np.ndarray:
 
 def format_p(p: float, n_perm: int) -> str:
     floor = 1 / (n_perm + 1)
-    return f"p < 1/{n_perm + 1}" if p <= floor + 1e-15 else f"{p:.4f}"
+    if p <= floor + 1e-15:
+        # p can equal the floor, so bound it by the next power of ten above it
+        e = int(np.floor(np.log10(floor))) + 1
+        return f"p < {10.0 ** e:.{max(-e, 0)}f}"
+    return f"{p:.4f}"
 
 
 def cell_tests(sectors, codes, idx, res) -> pd.DataFrame:
