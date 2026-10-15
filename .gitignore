@@ -1,11 +1,6 @@
-# --- excluded from the public repo (kept locally) ---
-# Earlier report/slide exports (superseded by the revised write-up)
+# --- PDFs (only the paper is published) ---
 *.pdf
-# Prior submission bundle and a redundant copy of the dataset
-submission/
-data/zip/
-# Internal working note
-REVISION_BRIEF.md
+!hekir_beyond_gics.pdf
 
 # --- Python ---
 __pycache__/
@@ -26,10 +21,3 @@ qdrant_storage/
 
 # --- Licensed market data (Yahoo Finance via yfinance); never commit ---
 data/prices/
-
-# Pre-edit backup of the paper source (kept locally only)
-Beyond_GICS_Vector_Search_Comparables.pre-edit.docx
-
-# Local working notes (kept out of the repo)
-FLAGGED.md
-HANDOFF_hekir.md
