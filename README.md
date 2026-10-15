@@ -13,6 +13,9 @@ verified identical to the numpy search).
 
 This public repository is a snapshot of private work begun in June 2026.
 
+I designed the study, set the hypotheses and made the calls about what the
+results mean; the code was written with Claude Code.
+
 ## Key findings
 
 N = 499 companies (dual-class listings merged), k = 10 neighbors, 10,000
@@ -66,7 +69,8 @@ firm-label permutations.
 
 ## Method notes
 
-- **Embeddings:** `all-MiniLM-L6-v2` (384-dim sentence-transformer), cosine
+- **Embeddings:** `all-MiniLM-L6-v2` (Reimers & Gurevych, 2019;
+  Sentence-Transformers, n.d.) (384-dim sentence-transformer), cosine
   similarity. The model reads at most 256 tokens. 292 of 499 summaries (58.5%)
   are longer, measured with the model's own tokenizer. So each summary is packed
   by sentence into chunks that fit, the chunks are embedded, and the chunk
@@ -82,9 +86,10 @@ firm-label permutations.
 - **Significance:** the kNN graph is held fixed while sector labels are permuted
   across firms (10,000 permutations, seed 42). Each cell's observed count is
   compared with its own permutation distribution, centered on the permuted
-  mean (two-sided; the smallest attainable p is 1/10001). Benjamini-Hochberg is
-  applied across the 110 off-diagonal cells. Directional asymmetry,
-  C[a→b] − C[b→a], is tested the same way across the 55 sector pairs.
+  mean (two-sided; the smallest attainable p is 1/10001). Benjamini-Hochberg
+  (Benjamini & Hochberg, 1995) is applied across the 110 off-diagonal cells.
+  Directional asymmetry, C[a→b] − C[b→a], is tested the same way across the 55
+  sector pairs.
 - **Mismatch candidates:** cross-sector rate of at least 0.7, with a modal
   neighbor sector other than the firm's own (83 firms). Counts at 0.6 / 0.7 /
   0.8 / 0.9 are 98 / 83 / 57 / 27 (`data/mismatch_threshold_counts.csv`).
@@ -95,7 +100,8 @@ firm-label permutations.
   peers). Tests are a sign-flip permutation and a firm bootstrap (10,000 each).
   Peer sets overlap across firms, so the firm-level tests treat
   non-independent observations as independent and the intervals are
-  optimistic.
+  optimistic. The peers come from June 2026 descriptions and the return window
+  ends in June 2026, so the test is in-sample, not a forecast.
 - **Before/after:** `data/variant_comparison.csv` gives the headline numbers
   as published (502 listings, truncated text), after merging share classes,
   and after chunking.
@@ -119,10 +125,16 @@ committed.
 Hoberg and Phillips (2010, 2016) measure product similarity as the cosine
 between word vectors drawn from each firm's full 10-K business description,
 recomputed annually across all public firms to build time-varying competitor
-networks. This study instead applies a pretrained sentence-embedding model to
-the short yfinance summaries of S&P 500 firms at a single point in time, and
-uses the resulting neighbors to test GICS sectors and return co-movement rather
-than to build a replacement classification.
+networks, which they distribute through the Hoberg-Phillips Data Library
+(Hoberg & Phillips, n.d.). This study instead applies a pretrained
+sentence-embedding model to the short yfinance summaries of S&P 500 firms at a
+single point in time, and uses the resulting neighbors to test GICS sectors and
+return co-movement rather than to build a replacement classification.
+
+Bhojraj, Lee and Oler (2003) compare GICS with SIC, NAICS and the Fama-French
+industry definitions, and find that GICS is significantly better at explaining
+stock return co-movement and cross-sectional variation in valuation multiples,
+growth rates, R&D spending and key financial ratios.
 
 ## References
 
@@ -134,24 +146,20 @@ than to build a replacement classification.
   of industry classification schemes for capital market research. *Journal of
   Accounting Research*, 41(5), 745–774.
   https://doi.org/10.1046/j.1475-679X.2003.00122.x
+- Hoberg, G., & Phillips, G. (n.d.). *Hoberg-Phillips Data Library*.
+  https://hobergphillips.tuck.dartmouth.edu/ (accessed 4 October 2026)
 - Hoberg, G., & Phillips, G. (2010). Product market synergies and competition in
   mergers and acquisitions: A text-based analysis. *Review of Financial
   Studies*, 23(10), 3773–3811. https://doi.org/10.1093/rfs/hhq053
 - Hoberg, G., & Phillips, G. (2016). Text-based network industries and
   endogenous product differentiation. *Journal of Political Economy*, 124(5),
   1423–1465. https://doi.org/10.1086/688176
-- Hoberg, G., & Phillips, G. Hoberg-Phillips Data Library.
-  https://hobergphillips.tuck.dartmouth.edu/ (accessed 4 October 2026)
-- Lee, C. M. C., Ma, P., & Wang, C. C. Y. (2015). Search-based peer firms:
-  Aggregating investor perceptions through internet co-searches. *Journal of
-  Financial Economics*, 116(2), 410–431.
-  https://doi.org/10.1016/j.jfineco.2015.02.003
 - Reimers, N., & Gurevych, I. (2019). Sentence-BERT: Sentence embeddings using
   Siamese BERT-networks. In *Proceedings of the 2019 Conference on Empirical
   Methods in Natural Language Processing and the 9th International Joint
   Conference on Natural Language Processing (EMNLP-IJCNLP)* (pp. 3982–3992).
   Association for Computational Linguistics. https://doi.org/10.18653/v1/D19-1410
-- sentence-transformers/all-MiniLM-L6-v2 [model card]. Hugging Face.
+- Sentence-Transformers. (n.d.). *all-MiniLM-L6-v2* [Model card]. Hugging Face.
   https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2 (accessed 4
   October 2026)
 
